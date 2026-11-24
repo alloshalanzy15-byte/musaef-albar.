@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10151c">
+  <meta name="description" content="مسعف البر الذكي - دليل الطوارئ والإسعافات الأولية في الرحلات البرية">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="مسعف البر">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>مسعف البر الذكي</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#home" aria-label="العودة للرئيسية">
+    <div class="brand-icon">🛡️</div>
+    <div>
+      <h1>مسعف البر</h1>
+      <p>رفيقك الذكي في الصحراء</p>
+    </div>
+  </a>
+  <button class="icon-button" id="themeButton" aria-label="تغيير المظهر" title="تغيير المظهر">☀️</button>
+</header>
+
+<main class="container">
+
+  <section class="welcome" id="home">
+    <span class="eyebrow">SMART DESERT FIRST AID</span>
+    <h2>سلامتك أولويتنا</h2>
+    <p>دليل مبسط يساعدك على معرفة التصرف الأولي في الحالات الطارئة أثناء رحلات البر.</p>
+    <button class="install-button" id="installButton" hidden>⬇️ تثبيت التطبيق</button>
+  </section>
+
+  <section class="search-section" aria-label="البحث">
+    <input id="searchInput" type="search" placeholder="🔍 ابحث عن حالة أو إسعاف أولي..." aria-label="البحث عن دليل إسعافي">
+    <div id="searchResults" class="search-results"></div>
+  </section>
+
+  <section class="panel compass-panel" id="services">
+    <div class="section-title">
+      <h3>🧭 البوصلة الرقمية</h3>
+      <span class="status" id="compassStatus">غير مفعلة</span>
+    </div>
+    <div class="compass">
+      <div class="compass-ring" id="compassDisc">
+        <span class="north">N</span>
+        <span class="east">E</span>
+        <span class="south">S</span>
+        <span class="west">W</span>
+        <span class="needle">▲</span>
+      </div>
+    </div>
+    <h2 class="degree" id="compassHeading">—°</h2>
+    <button class="primary-button" id="compassButton">تفعيل البوصلة</button>
+    <p class="hint">تحتاج البوصلة إلى جهاز يدعم مستشعر الاتجاه، وقد تتطلب إذنًا من المتصفح.</p>
+  </section>
+
+  <section class="panel timer-panel">
+    <div class="section-title">
+      <h3>⏱️ عداد زمن الحادثة</h3>
+      <span class="status">مؤقت</span>
+    </div>
+    <div id="timerDisplay" class="timer">00:00:00</div>
+    <div class="button-row">
+      <button class="primary-button" id="startTimer">بدء / إعادة</button>
+      <button class="secondary-button" id="stopTimer">إيقاف</button>
+    </div>
+    <p class="hint">يساعد في تسجيل وقت بداية الحادثة. لا يحدد شدة الإصابة أو تطور التسمم.</p>
+  </section>
+
+  <section id="serviceSection">
+    <div class="section-title section-heading">
+      <h3>الخدمات الرئيسية</h3>
+    </div>
+    <div class="service-grid">
+      <button class="service-card" id="cameraButton">
+        <span class="service-icon orange">📸</span>
+        <strong>كاميرا الطوارئ</strong>
+        <small>التقاط صورة للمساعدة في التعرّف على الحالة</small>
+      </button>
+      <button class="service-card" id="locationButton">
+        <span class="service-icon red">📍</span>
+        <strong>أقرب مستشفى</strong>
+        <small>فتح البحث عن المنشآت الطبية القريبة</small>
+      </button>
+      <button class="service-card" id="emergencyButton">
+        <span class="service-icon red">🚨</span>
+        <strong>أرقام الطوارئ</strong>
+        <small>عرض أرقام الجهات المختصة</small>
+      </button>
+      <button class="service-card" id="offlineButton">
+        <span class="service-icon green">📚</span>
+        <strong>دليل الإسعافات</strong>
+        <small>قراءة الإرشادات المحفوظة داخل التطبيق</small>
+      </button>
+    </div>
+  </section>
+
+  <section id="categories">
+    <div class="section-title section-heading">
+      <h3>فئات الإسعافات الأولية</h3>
+    </div>
+    <div class="category-grid" id="categoryGrid"></div>
+  </section>
+
+  <section>
+    <div class="section-title section-heading">
+      <h3>⚠️ الحالات الحرجة</h3>
+    </div>
+    <div class="urgent-list" id="urgentList"></div>
+  </section>
+
+  <section class="safety-note">
+    <strong>تنبيه طبي مهم</strong>
+    <p>هذا التطبيق للتوعية فقط ولا يغني عن التقييم الطبي أو الاتصال بالطوارئ. في الحالات الخطرة اطلب المساعدة فورًا، ولا تؤخرها بسبب استخدام التطبيق. لا تعتمد على الصور لتحديد نوع الثعبان أو النبات.</p>
+  </section>
+
+</main>
+
+<nav class="bottom-nav" aria-label="التنقل الرئيسي">
+  <button class="nav-item active" data-target="home">🏠<span>الرئيسية</span></button>
+  <button class="nav-item" data-target="categories">📚<span>الأدلة</span></button>
+  <button class="nav-item" data-target="services">🧭<span>الخدمات</span></button>
+  <button class="nav-item" id="navEmergency">🚨<span>الطوارئ</span></button>
+</nav>
+
+<button class="sos-button" id="sosButton" aria-label="عرض خيارات الطوارئ">SOS 🚨</button>
+
+<input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="close-button" id="closeModal" aria-label="إغلاق">✕</button>
+    <h2 id="modalTitle">التفاصيل</h2>
+    <img id="previewImg" alt="الصورة المختارة" hidden>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script src="./js/firstaid.js" defer></script>
+<script src="./js/app.js" defer></script>
+
+</body>
+</html>
